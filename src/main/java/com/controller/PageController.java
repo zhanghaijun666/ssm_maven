@@ -14,22 +14,22 @@ import org.springframework.web.servlet.ModelAndView;
 public class PageController {
 	@RequestMapping("/")
 	public String gotoPage() {
-		return "redirect:/login";
+		return "redirect:/login.jsp";
 	}
 
 	@RequestMapping("/login")
 	public String gotoLoginPage() {
-		return "jsp/login";
+		return "jsp/login.jsp";
 	}
 
 	@RequestMapping("/index")
 	public String gotoIndexPage() {
-		return "redirect:/login";
+		return "redirect:/login.jsp";
 	}
 	
 	@RequestMapping(value = "/adduser")
 	public String gotoAddUserPage() {
-		return "jsp/addUser";
+		return "jsp/addUser.jsp";
 	}
 	
 	
@@ -42,7 +42,7 @@ public class PageController {
 		ModelAndView mav = new ModelAndView();
 		// 数据
 		mav.addObject("name", "ppppppppppppppppppppp");
-		mav.setViewName("jsp/login");
+		mav.setViewName("jsp/login.jsp");
 		return mav;
 	}
 
@@ -50,7 +50,7 @@ public class PageController {
 	// 入门程序 第一 包类 + 类包 + 方法名
 	@RequestMapping(value = "/login2")
 	public String itemListt() {
-		return "jsp/home";
+		return "jsp/home.jsp";
 	}
 
 	// 第二中返回void
@@ -63,6 +63,14 @@ public class PageController {
 		request.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(request, response);
 	}
 	
+	@RequestMapping(value = "/index.html")
+	public String home() {
+		return "html/index.html";
+	}
 	
+	@RequestMapping(value = "/user.html")
+	public String user() {
+		return "html/user.html";
+	}
 	
 }

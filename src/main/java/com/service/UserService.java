@@ -20,7 +20,7 @@ public class UserService {
 	}
 	
 	public List<Users> getAllUsers(){
-		return userDao.getAllUserByState(1);
+		return userDao.getAllUser();
 	}
 	
 	public String addUser(Users user) {

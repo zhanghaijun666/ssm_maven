@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>用户信息</title>
+	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/metro/easyui.css">
+	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/mobile.css">
+	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/icon.css">
+	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.min.js"></script>
+	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.mobile.js"></script>
+	<script type="text/javascript" src="static/jquery-easyui-1.5/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+//条件查询
+function Search() {
+    var queryParameter = $('#allUserId').datagrid("options").queryParams;
+    queryParameter.name = $("#userSearchId [name='name']").val();
+    queryParameter.email = $("#userSearchId [name='email']").val();
+    $("#allUserId").datagrid("reload");
+}
+</script>
+	<div class="easyui-layout" data-options="fit: true">
+		<div id="userSearchId" data-options="region:'north'" style="height: 32px;">
+			<label>
+				<span>登录名：</span>
+				<input name="name" class="easyui-validatebox" maxlength="32" />
+			</label>
+			<label>
+				<span>邮箱：</span>
+				<input name="email" class="easyui-validatebox" data-options="validType:'email'" />
+			</label>
+			<label>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="Search()">查询</a>
+			</label>
+		</div>
+		<div data-options="region:'center'" >
+			<table id ="allUserId"></table>
+		</div>
+	</div>
+<script type="text/javascript">
+	$(function(){
+        $('#allUserId').datagrid( {
+        	url :"/ssm_maven/getAllUsers.do",
+           	method: 'get',
+           	idField:'id', 
+           	height: 'auto', 
+            nowrap: false, 
+            striped: true, 
+            border: true, 
+            collapsible:false,//是否可折叠的 
+            fit: true,//自动大小 
+          	/* sortName: 'name',
+            sortOrder: 'desc', */ 
+            remoteSort:false,  
+            singleSelect:false,//是否单选 
+            pagination:true,//分页控件 
+            rownumbers:true,//行号 
+            nowrap: false, //是否换行，True 就会把数据显示在一行里
+            columns:[[
+            	{field:'select',checkbox:true},
+            	{field:'id',title:'序号'}, 
+            	{field:'name',title:'登录名'}, 
+            	{field:'fullName',title:'姓名'}, 
+            	{field:'sex',title:'性别'}, 
+            	{field:'birthday',title:'生日'}, 
+            	{field:'password',title:'密码'}, 
+            	{field:'level',title:'等级'}, 
+            	{field:'state',title:'状态'}, 
+            	{field:'des',title:'简介'}, 
+            	{field:'tel',title:'电话'}, 
+            	{field:'email',title:'邮箱'}, 
+            	{field:'creatTime',title:'创建时间'}, 
+            	{field:'lastTime',title:'修改时间'}
+            ]],
+           	loadFilter: function(data){
+           		return data.allUsers ? data.allUsers: data;
+        	}
+		});
+        $('#allUserId').datagrid('getPager').pagination({
+        	total: 220,
+            pageSize: 10,//每页显示的记录条数，默认为10 
+            pageList: [5,10,15],//可以设置每页记录条数的列表 
+            beforePageText: '第',//页数文本框前显示的汉字 
+            afterPageText: '页    共 {pages} 页', 
+            displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录', 
+            buttons: [{ 
+                text: '添加', 
+                iconCls: 'icon-add', 
+                handler: function() { 
+                    //openDialog("add_dialog","add"); 
+                } 
+            }, '-', {
+                text: '修改', 
+                iconCls: 'icon-edit', 
+                handler: function() { 
+                    //openDialog("add_dialog","edit"); 
+                } 
+            }, '-',{ 
+                text: '删除', 
+                iconCls: 'icon-remove', 
+                handler: function(){ 
+                    
+                } 
+            }]
+        }); 
+    });
+</script>
+</body>
+</html>
