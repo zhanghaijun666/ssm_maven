@@ -91,8 +91,9 @@ public class UserController {
         List<Users> allUsers = userService.getAllUsers();
         PageInfo<Users> pageInfo=new PageInfo<>(allUsers);
         Map<String,Object> map = Maps.newHashMap();
-        map.put("allUsers",allUsers);
         map.put("pageInfo",pageInfo);
+        map.put("total",pageInfo.getTotal());
+        map.put("rows",allUsers);
         return JSON.toJSONString(map);
 	}
 }

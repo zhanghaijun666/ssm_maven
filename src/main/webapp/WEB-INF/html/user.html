@@ -22,6 +22,63 @@ function Search() {
     $("#allUserId").datagrid("reload");
 }
 </script>
+	<div id="addUserId" class="easyui-window" title="添加用户">   
+	   <form id="ff" method="post">
+			<div>   
+				<label for="name">账号：</label>
+				<input class="easyui-validatebox" name="name" data-options="required:true" />   
+			</div>
+			 <div>
+			     <label for="email">密码：</label>
+			     <input class="easyui-validatebox" name="email" data-options="validType:'email'" />   
+			 </div>
+			<div>
+				<label for="name">姓名：</label>
+				<input class="easyui-validatebox" name="fullName"  />   
+			</div>
+			<div>
+				<label for="name">性别：</label>
+				<input class="easyui-validatebox" name="sex" data-options="required:true" />   
+			</div>
+			<div>
+				<label for="name">生日：</label>
+				<input class="easyui-validatebox" name="birthday" data-options="required:true" />   
+			</div>
+			<div>   
+				<label for="name">等级：</label>
+				<input class="easyui-validatebox" name="level" data-options="required:true" />   
+			</div> 
+			<div>   
+				<label for="name">状态：</label>
+				<input class="easyui-validatebox" name="state" data-options="required:true" />   
+			</div> 
+			<div>   
+				<label for="name">简介：</label>
+				<input class="easyui-validatebox" name="des" data-options="required:true" />   
+			</div> 
+			<div>   
+				<label for="name">电话：</label>
+				<input class="easyui-validatebox" name="tel" data-options="required:true" />   
+			</div> 
+			<div>   
+				<label for="name">邮箱：</label>
+				<input class="easyui-validatebox" name="email" data-options="validType:'email'" />   
+			</div> 
+			<div>   
+				<label for="name">创建时间：</label>
+				<input class="easyui-validatebox" name="creatTime" data-options="required:true" />   
+			</div> 
+			<div>   
+				<label for="name">修改时间：</label>
+				<input class="easyui-validatebox" name="lastTime" data-options="required:true" />   
+			</div>
+			<div>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">重置</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">取消</a>
+			</div>
+		</form>
+	</div>
 	<div class="easyui-layout" data-options="fit: true">
 		<div id="userSearchId" data-options="region:'north'" style="height: 32px;">
 			<label>
@@ -49,11 +106,11 @@ function Search() {
            	height: 'auto', 
             nowrap: false, 
             striped: true, 
-            border: true, 
+            border: true,
             collapsible:false,//是否可折叠的 
             fit: true,//自动大小 
           	/* sortName: 'name',
-            sortOrder: 'desc', */ 
+            sortOrder: 'desc', */
             remoteSort:false,  
             singleSelect:false,//是否单选 
             pagination:true,//分页控件 
@@ -74,10 +131,7 @@ function Search() {
             	{field:'email',title:'邮箱'}, 
             	{field:'creatTime',title:'创建时间'}, 
             	{field:'lastTime',title:'修改时间'}
-            ]],
-           	loadFilter: function(data){
-           		return data.allUsers ? data.allUsers: data;
-        	}
+            ]]
 		});
         $('#allUserId').datagrid('getPager').pagination({
         	total: 220,
@@ -90,13 +144,13 @@ function Search() {
                 text: '添加', 
                 iconCls: 'icon-add', 
                 handler: function() { 
-                    //openDialog("add_dialog","add"); 
+                	$('#addUserId').window('open');
                 } 
             }, '-', {
                 text: '修改', 
                 iconCls: 'icon-edit', 
                 handler: function() { 
-                    //openDialog("add_dialog","edit"); 
+                    //openDialog("add_dialog","edit");
                 } 
             }, '-',{ 
                 text: '删除', 
@@ -106,6 +160,14 @@ function Search() {
                 } 
             }]
         }); 
+        $('#addUserId').window({
+            width: 600,
+            height: 400,
+            modal: true,
+            collapsible: false,
+            minimizable: false,
+            closed:true
+        });
     });
 </script>
 </body>
