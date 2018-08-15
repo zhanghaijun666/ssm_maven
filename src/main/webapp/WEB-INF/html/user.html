@@ -1,81 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>用户信息</title>
-	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/metro/easyui.css">
-	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/mobile.css">
-	<link rel="stylesheet" type="text/css" href="static/jquery-easyui-1.5/themes/icon.css">
-	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.min.js"></script>
-	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.mobile.js"></script>
-	<script type="text/javascript" src="static/jquery-easyui-1.5/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-//条件查询
-function Search() {
-    var queryParameter = $('#allUserId').datagrid("options").queryParams;
-    queryParameter.name = $("#userSearchId [name='name']").val();
-    queryParameter.email = $("#userSearchId [name='email']").val();
-    $("#allUserId").datagrid("reload");
-}
-</script>
-	<div id="addUserId" class="easyui-window" title="添加用户">   
-	   <form id="ff" method="post">
-			<div>   
-				<label for="name">账号：</label>
-				<input class="easyui-validatebox" name="name" data-options="required:true" />   
-			</div>
-			 <div>
-			     <label for="email">密码：</label>
-			     <input class="easyui-validatebox" name="email" data-options="validType:'email'" />   
-			 </div>
+	<div id="addUserId" class="easyui-dialog">
+	   <form id="addUserFormId" method="post" action="doadduser.do" enctype="application/json" class="easyui-form" >
+			<label>
+				账号：<input class="easyui-validatebox" name="name" data-options="required:true" />   
+			</label>
+			 <label>
+		    	 密码：<input class="easyui-validatebox" type="password" name="password" data-options="required:true" />   
+			 </label>
+			<label>
+				姓名：<input class="easyui-validatebox" name="fullName"  />
+			</label>
+			<label>
+				性别：
+				<select class="easyui-combobox" name="sex" data-options="required:true,height:22">
+				    <option value="1">男</option>   
+				    <option value="0">女</option>   
+				</select>  
+			</label>
+			<label>
+				生日：<input class="easyui-datebox" name="birthday" data-options="height:22,editable:false"></input>  
+			</label>
+			<label>   
+				等级：
+				<select class="easyui-combobox" name="level" data-options="required:true,height:22">
+				    <option value="0">普通用户</option>   
+				    <option value="1">管理员</option>
+				    <option value="1">超级管理员</option>    
+				</select>
+			</label> 
+			<label>   
+				状态：<input class="easyui-validatebox" name="state"  />   
+			</label> 
+			<label>   
+				简介：<input class="easyui-validatebox" name="des"  />   
+			</label> 
+			<label>   
+				电话：<input class="easyui-validatebox" name="tel"  />   
+			</label>
+			<label>   
+				邮箱：<input class="easyui-validatebox" name="email" data-options="validType:'email'" />   
+			</label>
+			<!-- <label>   
+				创建时间：<input class="easyui-datebox" name="creatTime" data-options="height:22,editable:false"></input> 
+			</label> 
+			<label>   
+				修改时间：<input class="easyui-datebox" name="lastTime" data-options="height:22,editable:false"></input>
+			</label> -->
 			<div>
-				<label for="name">姓名：</label>
-				<input class="easyui-validatebox" name="fullName"  />   
-			</div>
-			<div>
-				<label for="name">性别：</label>
-				<input class="easyui-validatebox" name="sex" data-options="required:true" />   
-			</div>
-			<div>
-				<label for="name">生日：</label>
-				<input class="easyui-validatebox" name="birthday" data-options="required:true" />   
-			</div>
-			<div>   
-				<label for="name">等级：</label>
-				<input class="easyui-validatebox" name="level" data-options="required:true" />   
-			</div> 
-			<div>   
-				<label for="name">状态：</label>
-				<input class="easyui-validatebox" name="state" data-options="required:true" />   
-			</div> 
-			<div>   
-				<label for="name">简介：</label>
-				<input class="easyui-validatebox" name="des" data-options="required:true" />   
-			</div> 
-			<div>   
-				<label for="name">电话：</label>
-				<input class="easyui-validatebox" name="tel" data-options="required:true" />   
-			</div> 
-			<div>   
-				<label for="name">邮箱：</label>
-				<input class="easyui-validatebox" name="email" data-options="validType:'email'" />   
-			</div> 
-			<div>   
-				<label for="name">创建时间：</label>
-				<input class="easyui-validatebox" name="creatTime" data-options="required:true" />   
-			</div> 
-			<div>   
-				<label for="name">修改时间：</label>
-				<input class="easyui-validatebox" name="lastTime" data-options="required:true" />   
-			</div>
-			<div>
-				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'">提交</a>
-				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">重置</a>
-				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'">取消</a>
+				<input type="submit" value="提交 " />
 			</div>
 		</form>
 	</div>
@@ -121,17 +97,35 @@ function Search() {
             	{field:'id',title:'序号'}, 
             	{field:'name',title:'登录名'}, 
             	{field:'fullName',title:'姓名'}, 
-            	{field:'sex',title:'性别'}, 
-            	{field:'birthday',title:'生日'}, 
+            	{field:'sex',title:'性别',formatter: function(value,row,index){
+            		if(value=="" || typeof value =="undefined"){
+            			return '未知';
+            		}else{
+            			return value==0?'女':'男';
+            		}
+            	}}, 
+            	{field:'birthday',title:'生日'},
             	{field:'password',title:'密码'}, 
-            	{field:'level',title:'等级'}, 
-            	{field:'state',title:'状态'}, 
+            	{field:'level',title:'等级'},
+            	{field:'state',title:'状态',formatter: function(value,row,index){
+            		return value==0?'删除':'有效';
+            	}},
             	{field:'des',title:'简介'}, 
             	{field:'tel',title:'电话'}, 
             	{field:'email',title:'邮箱'}, 
             	{field:'creatTime',title:'创建时间'}, 
             	{field:'lastTime',title:'修改时间'}
-            ]]
+            ]],
+            toolbar:['-',{ 
+                text: '删除',
+                iconCls: 'icon-clear', 
+                handler: function(){ 
+                	deleteUsers();
+                }
+            }],
+            onClickRow: function(rowIndex, rowData){
+            	console.log(rowData);
+            }
 		});
         $('#allUserId').datagrid('getPager').pagination({
         	total: 220,
@@ -144,30 +138,37 @@ function Search() {
                 text: '添加', 
                 iconCls: 'icon-add', 
                 handler: function() { 
+                	$('#addUserId form').form('reset');
                 	$('#addUserId').window('open');
                 } 
-            }, '-', {
-                text: '修改', 
-                iconCls: 'icon-edit', 
-                handler: function() { 
-                    //openDialog("add_dialog","edit");
-                } 
-            }, '-',{ 
-                text: '删除', 
+            },  '-',{ 
+                text: '删除',
                 iconCls: 'icon-remove', 
                 handler: function(){ 
-                    
+                	deleteUsers();
                 } 
             }]
-        }); 
-        $('#addUserId').window({
-            width: 600,
-            height: 400,
-            modal: true,
-            collapsible: false,
-            minimizable: false,
-            closed:true
         });
+    	$('#addUserId').dialog({
+    	    title: '添加用户',
+    	    width: 560,    
+    	    height: 360,    
+    	    closed: true,    
+    	    cache: false,
+    	    //href: 'get_content.php',    
+    	    modal: true,
+    	    buttons: [
+    	    	{text:'保存',iconCls:'icon-save',handler:function(){
+    	    		addUser();
+    	    	}},
+    	    	{text:'重置',iconCls:'icon-reload',handler:function(){
+    	    		$('#addUserId form').form('reset');
+    	    	}},
+    	    	{text:'关闭',iconCls:'icon-clear',handler:function(){
+    	    		$('#addUserId').window('close');
+    	    	}}
+    	    ]
+    	});
     });
 </script>
 </body>

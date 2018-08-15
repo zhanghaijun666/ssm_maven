@@ -11,6 +11,10 @@
 	<script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <!-- <script type="text/javascript" src="static/jquery-easyui-1.5/jquery.easyui.mobile.js"></script> -->
 	<script type="text/javascript" src="static/jquery-easyui-1.5/easyui-lang-zh_CN.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="static/css/home.css">
+<!-- <link rel="import" href="static/page/dialog.html" id="dialogHtmlId"> -->
+	<script type="text/javascript" src="static/js/user.js"></script>
 </head>
 <body class="easyui-layout" data-options="fit:true">
 	<div data-options="region:'north'" style="height:100px;"></div>
@@ -38,4 +42,17 @@
 	</div>
 	<div data-options="region:'center',href:'user.html'" style="background:#eee;"></div>
 </body>
+<script type="text/javascript">
+$(function(){
+	$('#addUserId1').dialog({    
+	    title: 'My Dialog',    
+	    width: 400,    
+	    height: 200,    
+	    closed: false,    
+	    cache: false,    
+	    //href: 'get_content.php',    
+	    modal: true   
+	});
+});
+</script>
 </html>

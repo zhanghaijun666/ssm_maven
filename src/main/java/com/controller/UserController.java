@@ -1,7 +1,7 @@
 package com.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Maps;
+import com.model.ResultMsg;
 import com.model.Users;
 import com.service.UserService;
 @Controller
@@ -66,7 +64,7 @@ public class UserController {
 	
 	@RequestMapping(value="/deleteuser.do",method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView doAddUser(@RequestParam("userId") Integer userId) {
+	public ModelAndView deleteuser(@RequestParam("userId") Integer userId) {
 		ModelAndView mav = new ModelAndView();
 		int num = userService.deleteUser(userId);
 		if(num > 0) {
@@ -80,20 +78,56 @@ public class UserController {
 	}
 	@RequestMapping(value="/getAllUsers.do",method=RequestMethod.GET)
 	@ResponseBody
-	public String  getAllUsers(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows) {
-		if( page == null || page <= 0 ) {
-			page = 1;
+	public String  getAllUsers(
+			@RequestParam(value="page",defaultValue="1") Integer page,
+			@RequestParam(value="rows",defaultValue="10") Integer rows,
+			@RequestParam(value="name",required=false) String name,
+			@RequestParam(value="email",required=false) String email) {
+        return userService.getSearchUsers(page, rows, name, email);
+	}
+	@RequestMapping(value="/doadduser.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String doAddUser(
+			@RequestParam("name") String name,
+			@RequestParam("password") String password,
+			@RequestParam("fullName") String fullName,
+			@RequestParam("sex") Integer sex,
+			@RequestParam("birthday") Long birthday,
+			@RequestParam("level") Integer level,
+			@RequestParam("state") Integer state,
+			@RequestParam("des") String des,
+			@RequestParam("tel") String tel,
+			@RequestParam("email") String email,
+		    HttpServletRequest request, HttpServletResponse response) {
+		Users user = new Users();
+		user.setName(name);
+		user.setPassword(password);
+		user.setFullName(fullName);
+		user.setSex(sex+"");
+		user.setBirthday(birthday+""); 
+		user.setLevel(level);
+		user.setState(state);
+		user.setDes(des);
+		user.setTel(tel);
+		user.setEmail(email);
+		
+//		@RequestBody Users user
+		String msg = userService.addUser(user);
+		System.out.println(msg);
+		System.out.println(user.toString());
+		return JSON.toJSONString(new ResultMsg(1,msg,""));
+	}
+	@RequestMapping(value="/deleteusers.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteusers(@RequestParam("userIds") String userIds) {
+		List<Integer> list = new ArrayList<>();
+		for(String id : userIds.split(",")) {
+			try {
+				list.add(Integer.valueOf(id));
+			}catch (Exception e) {
+			}
 		}
-		if( rows == null || rows <= 0 ) {
-			rows = 10;
-		}
-		PageHelper.startPage(page, rows);
-        List<Users> allUsers = userService.getAllUsers();
-        PageInfo<Users> pageInfo=new PageInfo<>(allUsers);
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("pageInfo",pageInfo);
-        map.put("total",pageInfo.getTotal());
-        map.put("rows",allUsers);
-        return JSON.toJSONString(map);
+		userService.deleteUser(list);
+		return JSON.toJSONString(new ResultMsg(1,"",""));
 	}
 }

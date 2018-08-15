@@ -57,10 +57,13 @@
 		delete from users
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-	<update id="deleteByState" parameterType="java.lang.Integer">
+	<update id="deleteByState" parameterType="java.util.List">
 		update users
 		set state = 0 
-		where id = #{id,jdbcType=INTEGER}
+		where id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+               #{item}       
+       </foreach> 
 	</update>
 	
 	
@@ -247,7 +250,41 @@
 			AND password = #{password,jdbcType=VARCHAR} 
 			AND state = 1 
 	</select>
-
+	<select id="getSearchUsers" resultMap="UserResultMap" parameterType="com.model.Users">
+		select
+		<include refid="Base_Column_List" />
+		from users
+		<where>
+			<if test="name != null and name != '' ">
+				AND name LIKE CONCAT('%',#{name},'%')
+			</if>
+			<if test="fullName != null and fullName != ''">
+				AND full_name LIKE CONCAT('%',#{fullName},'%')
+			</if>
+			<if test="sex != null and sex != ''">
+				AND sex LIKE CONCAT('%',#{sex},'%')
+			</if>
+			<if test="birthday != null and birthday != ''">
+				AND birthday LIKE CONCAT('%',#{birthday},'%')
+			</if>
+			<if test="level != null and level != ''">
+				AND level LIKE CONCAT('%',#{level},'%')
+			</if>
+			<if test="state != null and state != ''">
+				AND state LIKE CONCAT('%',#{state},'%')
+			</if>
+			<if test="des != null and des != ''">
+				AND des LIKE CONCAT('%',#{des},'%')
+			</if>
+			<if test="tel != null and tel != ''">
+				AND tel LIKE CONCAT('%',#{tel},'%')
+			</if>
+			<if test="email != null and email != ''">
+				AND email LIKE CONCAT('%',#{email},'%')
+			</if>
+		</where>
+		ORDER BY last_time desc
+	</select>
 
 
 </mapper>

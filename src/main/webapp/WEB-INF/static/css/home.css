@@ -1,1 +1,29 @@
 @charset "UTF-8";
+#addUserId form{
+	padding-top: 20px;
+}
+#addUserId form > label{
+	height: 32px;
+	line-height: 32px;
+	width: 46%;
+	float: left;
+	padding: 5px 0px 5px 15px;
+}
+#addUserId form > div{
+	display: block;
+	width: 96%;
+	height: 36px;
+	line-height: 36px;
+	padding-top: 30px;
+	text-align: center;
+}
+#addUserId form > div a{
+	margin: 0 20px 0 20px;
+	padding: 2px 5px 2px 5px;
+}
+#addUserId form input{
+	width: 160px;
+}
+#addUserId form select{
+	width: 160px;
+}

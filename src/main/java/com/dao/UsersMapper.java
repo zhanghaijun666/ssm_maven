@@ -12,8 +12,9 @@ public interface UsersMapper {
 	List<Users> getAllUser();
 	List<Users> getAllUsersByName(String name);
 	List<Users> getAllUserByState(Integer state);
+	List<Users> getSearchUsers(Users users);
     int deleteUserById(Integer id);
-    int deleteByState(Integer id);
+    int deleteByState(List<Integer> list);
     int insert(Users record);
     int insertSelective(Users record);
     int updateByPrimaryKeySelective(Users record);
