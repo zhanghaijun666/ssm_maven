@@ -10,7 +10,6 @@ function Search() {
 	}
 }
 function addUser() {
-	console.log("666666666666");
 	$('#addUserFormId').form('submit', {
 	    url: 'doadduser.do',
 	    contentType : 'application/json',
@@ -50,5 +49,18 @@ function deleteUsers(){
 		     }
 		 });
 		
+	}
+}
+function addTabs(title,url){
+	if($('#indexTabsId').tabs('exists',title)){
+		$('#indexTabsId').tabs('select',title);
+	}else{
+		$("#indexTabsId").tabs('add',{
+		    title:title,
+		    closable:true,
+		    content: '<div class="easyui-layout" data-options="fit:true">  '+
+		        '<div data-options="region:\'center\',href:\' '+url+' \'" ></div>   '+
+		        '</div> '
+		}); 
 	}
 }

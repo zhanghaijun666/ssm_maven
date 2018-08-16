@@ -27,3 +27,19 @@
 #addUserId form select{
 	width: 160px;
 }
+.easyui-accordion ul{
+	list-style-type:none;
+	padding: 0px;
+}
+.easyui-accordion ul li{
+	border: 1px solid red;
+	padding: 0px 10px;
+	margin: 5px 2px;
+	height: 26px;
+	line-height: 26px;
+	cursor: pointer;
+	border-radius:5px;
+}
+.easyui-accordion ul li:hover{
+	background-color: #eee;
+}

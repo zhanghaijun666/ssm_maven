@@ -17,30 +17,28 @@
 	<script type="text/javascript" src="static/js/user.js"></script>
 </head>
 <body class="easyui-layout" data-options="fit:true">
-	<div data-options="region:'north'" style="height:100px;"></div>
+	<div data-options="region:'north'" style="height:100px;">
+		<h1>欢迎您</h1>
+	</div>
 	<div data-options="region:'south'" style="height:32px;">
 		<div class="footer">版权所有@ 834205313@qq.com</div>
 	</div>
-	<div data-options="region:'west',title:'West',split:true" style="width:200px;">
-		<div id="aa" class="easyui-accordion" style="width:auto;height:100%;">   
-		    <div title="Title1" data-options="iconCls:'icon-save'">   
-	         	<a href="javascript:void(0)" id="mb" class="easyui-menubutton"     
-        data-options="menu:'#mm',iconCls:'icon-edit'">Edit</a>   
-<div id="mm" style="width:150px;">   
-    <div data-options="iconCls:'icon-undo'">Undo</div>   
-    <div data-options="iconCls:'icon-redo'">Redo</div>   
-    <div class="menu-sep"></div>   
-    <div>Cut</div>   
-    <div>Copy</div>   
-    <div>Paste</div>   
-    <div class="menu-sep"></div>   
-    <div data-options="iconCls:'icon-remove'">Delete</div>   
-    <div>Select All</div>   
-</div> 
+	<div data-options="region:'west',split:true" style="width:200px;">
+		<div class="easyui-accordion" data-options="fit:true">   
+	    	<div title="用户信息" data-options="iconCls:'icon-manager'">   
+	       	  	<ul>
+	       	  		<li onclick="addTabs('全部用户信息','user.html')">全部用户信息</li>
+	       	  		<!-- <li onclick="addTabs('有效用户信息','user.html')">有效用户信息</li>
+	       	  		<li onclick="addTabs('删除用户信息','user.html')">删除用户信息</li> -->
+	       	  	</ul>
 		    </div>
 		</div> 
 	</div>
-	<div data-options="region:'center',href:'user.html'" style="background:#eee;"></div>
+	<div id="indexTabsId" data-options="region:'center'" class="easyui-tabs" style="background:#eee;">
+	    <div title="首页">
+	        <h1>欢迎登陆系统</h1>
+	    </div>
+	</div>
 </body>
 <script type="text/javascript">
 $(function(){
@@ -53,6 +51,7 @@ $(function(){
 	    //href: 'get_content.php',    
 	    modal: true   
 	});
+	
 });
 </script>
 </html>
