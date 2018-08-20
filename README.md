@@ -4,7 +4,7 @@
 
 maven tomcat命令：tomcat7:run
 
-mvan mybatis-generator命令：mybatis-generator
+mvan mybatis-generator命令：mybatis-generator:generate
 
 
 git add .        （注：别忘记后面的.，此操作是把Test文件夹下面的文件都添加进来）
